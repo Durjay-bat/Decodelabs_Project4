@@ -1,0 +1,130 @@
+# Security Vulnerability Checklist
+
+print("=" * 50)
+print("      SECURITY VULNERABILITY CHECKLIST")
+print("=" * 50)
+
+score = 0
+issues = []
+
+# ----------------------------
+# Password Strength Check
+# ----------------------------
+password = input("\nEnter your password to test its strength: ")
+
+has_upper = False
+has_lower = False
+has_digit = False
+has_symbol = False
+
+symbols = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/`~"
+
+for ch in password:
+    if ch.isupper():
+        has_upper = True
+    elif ch.islower():
+        has_lower = True
+    elif ch.isdigit():
+        has_digit = True
+    elif ch in symbols:
+        has_symbol = True
+
+if len(password) >= 8 and has_upper and has_lower and has_digit and has_symbol:
+    print("✅ Strong Password")
+    score += 1
+else:
+    print("❌ Weak Password")
+    issues.append("Use at least 8 characters with uppercase, lowercase, number, and symbol.")
+
+# ----------------------------
+# Software Update Check
+# ----------------------------
+update = input("\nIs your operating system updated? (yes/no): ").lower()
+
+if update == "yes":
+    print("✅ System is up to date.")
+    score += 1
+else:
+    print("❌ System is outdated.")
+    issues.append("Install the latest security updates.")
+
+# ----------------------------
+# Antivirus Check
+# ----------------------------
+antivirus = input("\nDo you have antivirus installed? (yes/no): ").lower()
+
+if antivirus == "yes":
+    print("✅ Antivirus detected.")
+    score += 1
+else:
+    print("❌ No antivirus found.")
+    issues.append("Install a trusted antivirus program.")
+
+# ----------------------------
+# Two-Factor Authentication
+# ----------------------------
+twofa = input("\nDo you use Two-Factor Authentication? (yes/no): ").lower()
+
+if twofa == "yes":
+    print("✅ Two-Factor Authentication enabled.")
+    score += 1
+else:
+    print("❌ Two-Factor Authentication not enabled.")
+    issues.append("Enable Two-Factor Authentication on important accounts.")
+
+# ----------------------------
+# Unsafe User Practices
+# ----------------------------
+print("\nAnswer the following questions:")
+
+reuse = input("Do you reuse the same password on multiple websites? (yes/no): ").lower()
+if reuse == "yes":
+    issues.append("Avoid reusing passwords.")
+else:
+    score += 1
+
+emails = input("Do you click unknown email links? (yes/no): ").lower()
+if emails == "yes":
+    issues.append("Never click suspicious email links.")
+else:
+    score += 1
+
+downloads = input("Do you download software from unknown websites? (yes/no): ").lower()
+if downloads == "yes":
+    issues.append("Download software only from trusted websites.")
+else:
+    score += 1
+
+wifi = input("Do you frequently use public Wi-Fi without a VPN? (yes/no): ").lower()
+if wifi == "yes":
+    issues.append("Avoid unsecured public Wi-Fi or use a VPN.")
+else:
+    score += 1
+
+# ----------------------------
+# Final Report
+# ----------------------------
+print("\n" + "=" * 50)
+print("           SECURITY REPORT")
+print("=" * 50)
+
+print("Security Score:", score, "/ 8")
+
+if score == 8:
+    print("\nExcellent! Your system appears secure.")
+elif score >= 6:
+    print("\nGood security, but some improvements are recommended.")
+elif score >= 4:
+    print("\nModerate security risk.")
+else:
+    print("\nHigh security risk!")
+
+print("\nRecommendations:")
+
+if len(issues) == 0:
+    print("No vulnerabilities detected.")
+else:
+    for i, issue in enumerate(issues, 1):
+        print(f"{i}. {issue}")
+
+print("\nThank you for using the Security Vulnerability Checklist.")
